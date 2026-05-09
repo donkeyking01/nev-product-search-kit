@@ -95,4 +95,4 @@ offline-pipeline/
 ## 说明
 
 - `dashboard/` 中数据来源于本流程产出；
-- `nev-product-research-skill/` 参考本流程方法，但不直接复用脚本和数据。
+- `nev-product-research/` 参考本流程方法，但不直接复用脚本和数据。

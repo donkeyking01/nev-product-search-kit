@@ -83,11 +83,12 @@
 |-- dashboard/
 |-- docs/
 |   |-- examples/
-|   `-- iamges/
-|-- nev-product-research-skill/
-|   |-- workflows/
-|   |-- templates/
-|   `-- scripts/
+|   `-- images/
+|-- nev-product-research/
+|   |-- agents/
+|   |-- references/
+|   |-- scripts/
+|   `-- workflows/
 |-- offline-pipeline/
 |   |-- analysis/
 |   |-- crawler/
@@ -116,12 +117,12 @@
 
 ```bash
 git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
-cp -r nev-product-search-kit/nev-product-research-skill ~/.codex/skills/nev-product-research-skill
+cp -r nev-product-search-kit/nev-product-research ~/.codex/skills/nev-product-research
 ```
 #### Claude Code
 ```bash
 git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
-cp -r nev-product-search-kit/nev-product-research-skill ~/.claude/skills/nev-product-research-skill
+cp -r nev-product-search-kit/nev-product-research ~/.claude/skills/nev-product-research
 ```
 #### 手动安装
 

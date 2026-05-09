@@ -120,14 +120,14 @@ Open `dashboard/index.html` directly in a browser.
 
 ```bash
 git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
-cp -r nev-product-search-kit/nev-product-research-skill ~/.codex/skills/nev-product-research-skill
+cp -r nev-product-search-kit/nev-product-research ~/.codex/skills/nev-product-research
 ```
 
 #### Claude Code
 
 ```bash
 git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
-cp -r nev-product-search-kit/nev-product-research-skill ~/.claude/skills/nev-product-research-skill
+cp -r nev-product-search-kit/nev-product-research ~/.claude/skills/nev-product-research
 ```
 
 #### Manual install
