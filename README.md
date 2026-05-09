@@ -10,7 +10,7 @@
 
 `NEV-Product-Research-Kit` is a product research toolkit for the new energy passenger vehicle market. It combines an offline data pipeline, a decision-support dashboard, and an agent skill for evidence-based product research.
 
-Inspired by the research framework behind [RAG_System](https://github.com/DonkeyKing01/RAG_System), this project focuses on engineering implementation, workflow reproducibility, and real research collaboration rather than staying at the level of a paper demo.
+Inspired by the research framework behind [SCSI-SLM-EV-Design](https://github.com/DonkeyKing01/SCSI-SLM-EV-Design), this project focuses on engineering implementation, workflow reproducibility, and real research collaboration rather than staying at the level of a paper demo.
 
 The repository currently contains three major modules:
 

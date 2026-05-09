@@ -10,7 +10,7 @@
 
 `NEV-Product-Research-Kit` 是一个面向新能源乘用车市场的产品研究工具合集，包括离线工作流、数据面板与 skill。
 
-基于 [RAG_System](https://github.com/DonkeyKing01/RAG_System)论文研究框架和方法指导，本项目着重展现工程实现、流程复现和实际研究协作，包含以下三个模块：
+基于 [SCSI-SLM-EV-Design](https://github.com/DonkeyKing01/SCSI-SLM-EV-Design)论文研究框架和方法指导，本项目着重展现工程实现、流程复现和实际研究协作，包含以下三个模块：
 
 - `offline-pipeline/`：可离线数据采集、处理、建模、交互式设计服务工作流程
 - `dashboard/`：基于整理后结果快照构建的决策辅助数据面板
