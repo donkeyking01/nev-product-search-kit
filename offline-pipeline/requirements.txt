@@ -1,0 +1,51 @@
+# Core data processing
+numpy>=2.0.0
+pandas>=2.2.0
+python-dateutil>=2.8.2
+openpyxl>=3.1.0
+tqdm>=4.67.0
+colorama>=0.4.6
+
+# Web scraping and parsing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+selenium>=4.15.0
+fake-useragent>=1.4.0
+
+# Machine learning and visualization
+scikit-learn>=1.5.0
+matplotlib>=3.9.0
+seaborn>=0.13.0
+umap-learn>=0.5.0
+
+# NLP and embeddings
+transformers>=4.46.0,<5
+sentence-transformers>=3.0.0
+sentencepiece>=0.1.99
+torch>=2.4.0
+
+# Vector database and graph database
+chromadb>=0.5.0
+neo4j>=5.26.0
+
+# Environment and utilities
+python-dotenv>=1.0.0
+python-multipart>=0.0.18
+filetype>=1.2.0
+Pillow>=11.0.0
+
+# LLM and RAG
+openai>=1.30.0
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-openai>=0.2.0
+
+# App and API
+chainlit>=2.0.0
+fastapi>=0.115.0
+uvicorn>=0.30.0
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+httpx>=0.27.0
+aiohttp>=3.10.0

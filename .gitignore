@@ -68,9 +68,11 @@ pythonenv*/
 # 环境变量配置
 # ============================================
 .env
+.env.example
 .env.local
 .env.*.local
 .envrc
+offline-pipeline/.env
 
 # ============================================
 # 日志文件
@@ -102,6 +104,7 @@ Deploy/
 # ============================================
 # 但保留爬虫配置文件
 !Crawler/config/*.json
+!offline-pipeline/.env.example
 
 # ============================================
 # 测试和覆盖率报告
@@ -155,11 +158,8 @@ Desktop.ini
 # ============================================
 .chainlit/
 .files/
+!offline-pipeline/rag/.chainlit/
+!offline-pipeline/rag/.chainlit/config.toml
 
-# ============================================
-# 数据集压缩包（用于 Release）
-# ============================================
-Data*.zip
-Data*.tar.gz
-Data*.7z
-
+Ver2.md
+output/

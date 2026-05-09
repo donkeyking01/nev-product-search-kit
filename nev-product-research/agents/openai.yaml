@@ -1,0 +1,4 @@
+interface:
+  display_name: "NEV Product Research"
+  short_description: "为新能源乘用车研究生成证据驱动的产品交付物"
+  default_prompt: "针对这个新能源乘用车研究任务，按范围定义、证据收集、证据标准化、产品模型、用户模型、机会诊断和交付物生成的顺序推进，并输出可追溯结论。"

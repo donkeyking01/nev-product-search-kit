@@ -1,294 +1,147 @@
-# EV PM DSS - 电动汽车产品管理决策支持系统
+<div align="center">
 
-Electric Vehicle Product Management Decision Support System
+# NEV-Product-Research-Kit
 
----
+[中文](README.zh-CN.md) | English
 
-## 项目简介
+</div>
 
-EV PM DSS 是一个端到端的电动汽车产品决策支持系统，结合了数据采集、知识图谱、向量检索和大模型推理，为产品经理提供从用户洞察到 PRD 撰写的全流程智能辅助。
+## Overview
 
-**项目演进：**
+`NEV-Product-Research-Kit` is a product research toolkit for the new energy passenger vehicle market. It combines an offline data pipeline, a decision-support dashboard, and an agent skill for evidence-based product research.
 
-本项目基于 [RAG_System](https://github.com/DonkeyKing01/RAG_System) 开发，在初代系统基础上进行了全面升级：
-- **数据收集**：扩展数据规模至 52,000+ 条有效评论，覆盖 12 个主流品牌
-- **建模方法**：引入用户画像聚类和 IPA 战略分析，增强数据洞察能力
-- **应用属性**：强化产品管理场景，支持用户洞察、竞品分析、PRD 撰写全流程
+Inspired by the research framework behind [RAG_System](https://github.com/DonkeyKing01/RAG_System), this project focuses on engineering implementation, workflow reproducibility, and real research collaboration rather than staying at the level of a paper demo.
 
-初代项目详情和相关论文请参见：[RAG_System Repository](https://github.com/DonkeyKing01/RAG_System)
+The repository currently contains three major modules:
 
-**核心数据规模：**
+- `offline-pipeline/`: offline workflows for data collection, processing, modeling, retrieval, and interactive research support
+- `dashboard/`: a decision-support dashboard built from processed research snapshots
+- `nev-product-research/`: an agent skill that turns raw evidence into traceable product research deliverables
 
-- 数据量级：52,000+ 条深度用户评论
-- 覆盖范围：12 个主流品牌（比亚迪、特斯拉、蔚来、理想、小鹏、问界、极氪、小米、BBA等）
-- 细分粒度：110+ 车系，22,000+ 车型配置图片
-- 用户画像：8 个权威聚类画像
-- 知识图谱：Neo4j 图数据库，支持 RAG 检索增强生成
+## Modules
 
----
+### 1. `offline-pipeline/`
 
-## 系统演示
+The offline pipeline contains the core research workflow, including:
 
-### 系统架构图
-![系统架构图](./docs/images/architecture.png)
+- **Data ingestion and normalization**: organize vehicle specs, user comments, competitor information, and public materials into cleaner, reusable inputs
+- **User voice structuring**: transform unstructured comments into product dimensions, scenarios, sentiment, pain points, and need signals
+- **Product-user mapping analysis**: connect product-side performance with user-side preferences through IPA, persona analysis, and product-dimension comparisons
+- **Competitor and product-dimension analysis**: compare NEV products on price, range, charging, space, comfort, cockpit, and assisted driving dimensions
+- **Evidence-chain outputs**: separate user quotes, product facts, model inferences, and analysis conclusions into traceable intermediate artifacts
+- **Opportunity inputs**: prepare structured results for downstream dashboard views and product research reports
 
-### 用户画像聚类结果
-![用户画像可视化](./docs/images/persona-clusters.png)
+#### Architecture
 
-### IPA 战略分析矩阵
-![IPA 分析图](./docs/images/ipa-matrix.png)
+<p align="center">
+  <img src="./docs/images/architecture.png" alt="System architecture" width="75%">
+</p>
 
-### RAG 问答系统界面
-![RAG 界面截图](./docs/images/rag-interface.png)
+See [offline-pipeline/README.md](offline-pipeline/README.md) for more details.
 
----
+### 2. `dashboard/`
 
-## 系统架构与功能
+`dashboard/` is a data understanding and decision-support surface for EV product managers. It is designed for quickly browsing and interpreting key outputs from the offline pipeline.
 
-系统采用模块化设计，主要包含五大核心模块：
+#### Preview
 
+<p align="center">
+  <img src="./docs/images/dashboard-1.png" alt="Dashboard preview 1" width="75%">
+</p>
+
+<p align="center">
+  <img src="./docs/images/dashboard-2.png" alt="Dashboard preview 2" width="75%">
+</p>
+
+### 3. `nev-product-research/`
+
+`nev-product-research/` is a skill for NEV product and user research.
+
+It follows an evidence-first workflow:
+
+1. Define the research scope
+2. Collect evidence from the web
+3. Normalize the evidence structure
+4. Build the product-side model
+5. Build the user-side model
+6. Diagnose opportunity areas
+7. Generate deliverables
+
+#### Example case
+
+This project provides a sample case generated based on `nev-product-research`, intended to demonstrate how the skill can start from a relatively short product research question and gradually complete Scope definition, evidence organization, product-side modeling, user-side modeling, opportunity diagnosis, and final report generation.
+
+The sample question is:
+
+> What product opportunities exist in long-distance travel experiences for family users in the RMB 200k-300k new energy family SUV market?
+
+The sample outputs are located in [docs/examples](./docs/examples/), showing the complete generated results from Research Scope, Evidence Collection, Product Model, User Model, and Opportunity Cards to Final Report.
+
+This sample is used to illustrate the execution flow and deliverable format of the Skill, and does not represent the only possible research question or a fixed template.
+
+## Repository Structure
+
+```text
+.
+|-- dashboard/
+|-- docs/
+|   |-- examples/
+|   `-- images/
+|-- nev-product-research/
+|   |-- agents/
+|   |-- references/
+|   |-- scripts/
+|   `-- workflows/
+|-- offline-pipeline/
+|   |-- analysis/
+|   |-- crawler/
+|   |-- data/
+|   |-- graph/
+|   |-- process/
+|   |-- rag/
+|   `-- vector/
+|-- README.md
+`-- README.zh-CN.md
 ```
-EV PM DSS/
-├── Crawler/    # 数据采集：全量采集参数、图片与UGC评论
-├── Process/    # 数据处理：清洗、标准化与结构化处理
-├── Analysis/   # 智能分析：用户画像 (Persona) & 战略分析 (IPA)
-├── Graph/      # 知识图谱：Neo4j 图数据库构建与查询
-├── Vector/     # 向量数据库：ChromaDB 语义检索
-└── RAG/        # RAG 应用：基于 Chainlit 的智能问答系统
-```
 
-### 1. 数据基础设施 (Crawler + Process)
+## Quick Start
 
-- **采集 (Crawler):** 针对汽车之家平台，自动化采集车型参数、外观/内饰图片及全量用户口碑。
-- **治理 (Process):** 对非结构化数据进行清洗与标准化，输出统一格式的 ugc.csv 黄金数据集，包含 20+ 个核心分析字段（真实续航、成交价、地缘信息等）。
+### `offline-pipeline/`
 
-### 2. 用户画像分析 (User Persona Modeling)
+See [offline-pipeline/README.md](offline-pipeline/README.md).
 
-基于 K-Means 聚类算法，从评论行为中提取用户注意力向量，结合地理、价格、用车频率等外部属性，精准识别出 8 类典型用户群体：
+### `dashboard/`
 
-- 全能均衡型
-- 传统务实型
-- 品质体验型
-- 内饰舒适型
-- 极致空间型
-- 极致操控型
-- 颜值至上型
-- 续航焦虑型
+Open `dashboard/index.html` directly in a browser.
 
-### 3. IPA 战略分析 (Importance-Performance Analysis)
+### `nev-product-research/`
 
-构建 "用户关注度-产品表现力" 二维矩阵，针对 7 大核心维度（外观、内饰、空间、智能、操控、续航、性价比）进行战略评估，识别产品的优势区、改进区与机会区。
-
-### 4. 知识增强层 (Graph + Vector)
-
-**知识图谱 (Neo4j)**
-
-- 实体节点：Brand → Series → Model 车型层级，UserPersona 画像节点
-- 关系网络：52,000+ Review 节点通过 MENTIONS 关系连接车型
-- 属性丰富：完整评分数据（7维）、文本内容（9字段）、IPA 战略定位
-
-**向量数据库 (ChromaDB)**
-
-- 嵌入模型：paraphrase-multilingual-MiniLM-L12-v2
-- 三个集合：ugc_reviews（用户评论）、vehicle_specs（车型规格）、user_personas（画像描述）
-- 智能检索：分层检索策略（快速15条 → 标准50条 → 深度100条）
-
-### 5. RAG 智能问答系统
-
-**三大核心功能**
-
-- **用户洞察分析 (User Insights):** 基于真实用户评论和权威画像，分析用户需求、痛点和期望
-- **竞品分析 (Competitor Analysis):** 对比多品牌车型的关键参数，整合用户口碑和官方规格
-- **PRD 文档撰写 (PRD Writer):** 自动生成产品需求文档，所有需求点可溯源到具体数据
-
-**技术亮点**
-
-- 对话记忆：支持多轮对话，自动理解上下文和指代关系
-- 混合检索：知识图谱（结构化）+ 向量库（语义检索）
-- 数据溯源：每个洞察都标注具体来源，防止幻觉
-- 智能路由：自动判断问题类型，选择最优检索策略
-
----
-
-## 技术栈
-
-**数据科学**
-
-- 语言：Python 3.13
-- 数据处理：Pandas, NumPy
-- 机器学习：Scikit-learn (K-Means)
-- NLP：Transformers (RoBERTa-Chinese), Sentence-Transformers
-- 可视化：Matplotlib, Seaborn
-
-**数据库与存储**
-
-- 知识图谱：Neo4j Aura
-- 向量数据库：ChromaDB
-- 嵌入模型：paraphrase-multilingual-MiniLM-L12-v2
-
-**RAG 应用**
-
-- 前端框架：Chainlit
-- 大语言模型：SiliconFlow API (DeepSeek-R1-Distill-Qwen-32B)
-- 路由模型：Qwen2.5-7B-Instruct
-
----
-
-## 快速开始
-
-### 环境配置
+#### Codex
 
 ```bash
-git clone https://github.com/DonkeyKing01/EV-PM-DSS.git
-cd EV-PM-DSS
-pip install -r requirements.txt
+git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
+cp -r nev-product-search-kit/nev-product-research-skill ~/.codex/skills/nev-product-research-skill
 ```
 
-### 下载数据集
-
-**重要：** 数据文件未包含在代码仓库中，请从 [Releases](https://github.com/DonkeyKing01/EV-PM-DSS/releases) 页面下载。
-
-1. 访问 [Releases 页面](https://github.com/DonkeyKing01/EV-PM-DSS/releases)
-2. 下载 `Data.zip` 文件
-3. 解压到项目根目录
-4. **构建向量数据库**（必须执行）：
-   ```bash
-   python Vector/build_vector_db.py
-   ```
-   构建时间约 10-15 分钟，完成后目录结构为：
-   ```
-   EV-PM-DSS/
-   ├── Data/
-   │   ├── Raw/                  # 原始数据（评论、参数，不含图片）
-   │   ├── Processed/            # 处理后数据 (ugc.csv)
-   │   ├── Analyzed/             # 分析结果
-   │   ├── Vector/               # 向量库（自动生成）
-   │   └── UGC_Vector_chroma/    # 向量库（自动生成）
-   └── ...
-   ```
-
-**说明：**
-- 车型图片（22,000+ 张）未包含在 Release 中，因文件过大且当前项目未使用
-- 如需图片数据，请运行 `python Crawler/Picture_crawler.py` 自行采集
-- 向量数据库需自行构建（可重建且便于自定义参数）
-
-### 配置环境变量
-
-复制 `.env.example` 为 `.env`，填入你的凭据：
+#### Claude Code
 
 ```bash
-# Neo4j 数据库
-NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
-NEO4J_USERNAME=neo4j
-NEO4J_PASSWORD=your-password
-
-# SiliconFlow API
-SILICONFLOW_API_KEY=your-api-key
+git clone https://github.com/DonkeyKing01/nev-product-search-kit.git
+cp -r nev-product-search-kit/nev-product-research-skill ~/.claude/skills/nev-product-research-skill
 ```
 
-### 运行核心流程
+#### Manual install
 
-**注意：** 如果已下载 Release 中的数据集，步骤 1-2 和步骤 6 是必须的，其他可选。
+Keep the following structure and copy `nev-product-research/` into the target agent's skills directory:
 
-```bash
-# 1. 构建向量数据库（必须，如已下载数据集）
-python Vector/build_vector_db.py
-
-# 2. 构建知识图谱（必须）
-python Graph/build_graph.py
-
-# 3. 数据采集（可选，如已下载数据集请跳过）
-python Crawler/Parameter_crawler.py
-python Crawler/UGC_crawler.py
-
-# 4. 数据处理（可选，如已下载数据集请跳过）
-python Process/Para_process.py
-python Process/UGC_process.py
-
-# 5. 用户画像分析（可选，已有结果在 Data/Analyzed/Persona/）
-cd Analysis/Persona
-python step1_extract_attention.py
-python step3_final_clustering.py
-python step4_merge_external_attributes.py
-
-# 6. IPA 战略分析（可选，已有结果在 Data/Analyzed/IPA/）
-cd ../IPA
-python step1_compute_scores.py
-python step2_generate_ipa_reports.py
-
-# 7. 启动 RAG 应用
-# 7. 启动 RAG 应用
-chainlit run RAG/app.py
+```text
+nev-product-research/
+  agents/
+  references/
+  scripts/
+  workflows/
 ```
 
-访问 http://localhost:8000 开始使用智能问答系统。
+## License
 
----
-
-## 项目结构
-
-```
-EV PM DSS/
-├── Crawler/              # 数据采集模块
-│   ├── Parameter_crawler.py
-│   ├── UGC_crawler.py
-│   └── Picture_crawler.py
-├── Process/              # 数据处理模块
-│   ├── Para_process.py
-│   ├── UGC_process.py
-│   └── Pic_process.py
-├── Analysis/             # 分析模块
-│   ├── Persona/         # 用户画像聚类
-│   └── IPA/             # 重要性-表现分析
-├── Graph/                # 知识图谱模块
-│   ├── build_graph.py
-│   ├── test_graph.py
-│   └── clear_graph.py
-├── Vector/               # 向量数据库模块
-│   ├── build_vector_db.py
-│   └── verify_db.py
-├── RAG/                  # RAG 应用模块
-│   ├── app.py           # Chainlit 主程序
-│   ├── tools/           # 检索和分析工具
-│   └── chains/          # LangChain 链（预留）
-└── Data/                 # 数据存储
-    ├── Raw/             # 原始采集数据
-    ├── Processed/       # 处理后数据
-    ├── Analyzed/        # 分析结果
-    └── Vector/          # 向量数据库文件
-```
-
----
-
-## 更新日志
-
-### v1.0.0 (2026-02-16)
-
-- **RAG 应用模块发布**：基于 Chainlit 的智能问答系统上线
-- **对话记忆**：支持多轮对话，自动理解上下文
-- **混合检索**：知识图谱 + 向量库双引擎检索
-- **数据溯源**：所有洞察可展开查看原始数据来源
-- **三大功能**：用户洞察、竞品分析、PRD 撰写
-
-### v0.3.0 (2026-02-15)
-
-- **知识图谱模块发布**：构建 Neo4j 知识图谱，整合 52,000+ 评论
-- **向量数据库模块**：ChromaDB 语义检索系统
-- **属性增强**：Review 节点包含完整文本内容和评分数据
-
-### v0.2.0 (2026-02-14)
-
-- 用户画像模块完工：成功实现基于注意力机制的用户聚类
-- IPA 模块启动：完成基础评分矩阵计算逻辑
-
----
-
-## 贡献与联系
-
-欢迎提交 Issue 或 Pull Request 改进本项目。
-
-- **Author:** [@DonkeyKing01](https://github.com/DonkeyKing01)
-- **Repository:** [EV-PM-DSS](https://github.com/DonkeyKing01/EV-PM-DSS)
-- **License:** MIT
-
-本项目仅供学习研究使用。
+MIT
